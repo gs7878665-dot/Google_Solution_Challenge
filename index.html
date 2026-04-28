@@ -524,7 +524,8 @@
     </div>
 
     <script>
-        const API_URL = window.location.port === '5500' || window.location.protocol === 'file:' ? 'http://127.0.0.1:5000' : '';
+        const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+        const API_URL = isLocal && window.location.port !== '5000' ? 'http://127.0.0.1:5000' : '';
         let globalRawFile = null;
         let globalMetrics = null;
         let fixedCsvBase64 = null;
