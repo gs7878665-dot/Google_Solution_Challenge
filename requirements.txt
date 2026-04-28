@@ -1,0 +1,8 @@
+flask
+flask-cors
+pandas
+scikit-learn
+numpy
+reportlab
+google-genai
+python-dotenv
