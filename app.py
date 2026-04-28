@@ -21,6 +21,10 @@ from reportlab.lib import colors
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def index():
+    return send_file('index.html')
+
 # Gemini will automatically use GEMINI_API_KEY from environment
 
 @app.route('/audit', methods=['POST'])
@@ -368,4 +372,5 @@ def report():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)

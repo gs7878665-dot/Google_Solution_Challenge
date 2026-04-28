@@ -6,3 +6,4 @@ numpy
 reportlab
 google-genai
 python-dotenv
+gunicorn
