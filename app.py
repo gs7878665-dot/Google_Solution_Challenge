@@ -87,7 +87,11 @@ def audit():
             df_encoded[sensitive_col] = le.fit_transform(df_encoded[sensitive_col].astype(str))
             
         numeric_df = df_encoded.select_dtypes(include=[np.number])
-        corr_matrix = numeric_df.corr().replace({np.nan: None}).to_dict()
+        corr_raw = numeric_df.corr().to_dict()
+        corr_matrix = {
+            col: {k: (None if pd.isna(v) else float(v)) for k, v in row.items()}
+            for col, row in corr_raw.items()
+        }
         
         proxy_flags = []
         if sensitive_col in corr_matrix:
